@@ -1,0 +1,8 @@
+#
+# PRIVATE VARIABLES
+#
+
+access_key = "{YOUR_AWS_ACCESS_KEY}"
+secret_key = "{YOUR_AWS_SECRET_KEY}"
+ssh_key    = "{YOUR_PUBLIC_SSH_KEY}"
+owner      = "{YOUR_NAME}"
