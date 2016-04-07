@@ -1,5 +1,5 @@
 resource "template_file" "bootstrap_puppetca" {
-  template      = "${file("init/cloud-config.yml")}"
+  template      = "${file("cloudinit.yml")}"
 
   vars {
     hostname    = "${var.vdc}-puppetca01"
@@ -8,7 +8,7 @@ resource "template_file" "bootstrap_puppetca" {
 }
 
 resource "template_file" "bootstrap_puppetdb" {
-  template      = "${file("init/cloud-config.yml")}"
+  template      = "${file("cloudinit.yml")}"
   count         = "${length( split( ",", lookup( var.azs, var.region ) ) )}"
 
   vars {
@@ -18,7 +18,7 @@ resource "template_file" "bootstrap_puppetdb" {
 }
 
 resource "template_file" "bootstrap_jump" {
-  template      = "${file("init/cloud-config.yml")}"
+  template      = "${file("cloudinit.yml")}"
 
   vars {
     hostname    = "${var.vdc}-jump01"
