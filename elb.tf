@@ -22,7 +22,7 @@ resource "aws_elb" "puppetca" {
 
   tags {
     Name                      = "${var.owner}_puppet_elb_puppetca"
-    owner                     = "${var.owner}"
+    Owner                     = "${var.owner}"
   }
 }
 
@@ -54,6 +54,6 @@ resource "aws_elb" "puppetdb" {
 
   tags {
     Name                      = "${var.owner}_puppet_elb_puppetdb"
-    owner                     = "${var.owner}"
+    Owner                     = "${var.owner}"
   }
 }

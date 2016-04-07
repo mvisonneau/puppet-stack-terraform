@@ -5,7 +5,7 @@ resource "aws_vpc" "default" {
   cidr_block = "${var.vpc_cidr}"
   tags {
     Name     = "${var.owner}_puppet_vpc"
-    owner    = "${var.owner}"
+    Owner    = "${var.owner}"
   }
 }
 
@@ -29,7 +29,7 @@ resource "aws_subnet" "public_subnet" {
   count             = "${length( split( ",", lookup( var.azs, var.region ) ) )}"
   tags {
     Name            = "${var.owner}_puppet_public_subnet_${element( split( ",", lookup( var.azs, var.region ) ), count.index )}"
-    owner           = "${var.owner}"
+    Owner           = "${var.owner}"
   }
 }
 
@@ -41,7 +41,7 @@ resource "aws_subnet" "private_subnet" {
   count             = "${length( split( ",", lookup( var.azs, var.region ) ) )}"
   tags {
     Name            = "${var.owner}_puppet_private_subnet_${element( split( ",", lookup( var.azs, var.region ) ), count.index )}"
-    owner           = "${var.owner}"
+    Owner           = "${var.owner}"
   }
 }
 
@@ -53,16 +53,17 @@ resource "aws_subnet" "private_subnet" {
 resource "aws_internet_gateway" "default_igw" {
   vpc_id    = "${aws_vpc.default.id}"
   tags {
-      Name  = "${var.owner}_puppet_igw"
-      owner = "${var.owner}"
+    Name    = "${var.owner}_puppet_igw"
+    Owner   = "${var.owner}"
   }
 }
 
 # NAT GW
 resource "aws_nat_gateway" "default_natgw" {
   allocation_id = "${element( aws_eip.natgw.*.id, count.index )}"
-  subnet_id     = "${element( aws_subnet.private_subnet.*.id, count.index )}"
+  subnet_id     = "${element( aws_subnet.public_subnet.*.id, count.index )}"
   count         = "${length( split( ",", lookup( var.azs, var.region ) ) )}"
+  depends_on    = ["aws_internet_gateway.default_igw"]
   # Tags not supported
 }
 
@@ -79,7 +80,7 @@ resource "aws_route_table" "default_to_igw" {
   }
   tags {
     Name       = "${var.owner}_puppet_default_to_igw"
-    owner      = "${var.owner}"
+    Owner      = "${var.owner}"
   }
 }
 
@@ -92,7 +93,7 @@ resource "aws_route_table" "default_to_natgw" {
   count            = "${length( split( ",", lookup( var.azs, var.region ) ) )}"
   tags {
     Name           = "${var.owner}_puppet_default_to_natgw_${element( split( ",", lookup( var.azs, var.region ) ), count.index )}"
-    owner          = "${var.owner}"
+    Owner          = "${var.owner}"
   }
 }
 

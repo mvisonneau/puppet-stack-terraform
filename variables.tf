@@ -2,6 +2,15 @@ variable "access_key" {}
 variable "secret_key" {}
 variable "ssh_key" {}
 variable "owner" {}
+variable "vdc" {}
+
+variable "domain" {
+  default = "example.lan"
+}
+
+variable "dns_servers" {
+  default = "8.8.8.8"
+}
 
 variable "region" {
   default = "eu-central-1"
@@ -9,8 +18,8 @@ variable "region" {
 
 variable "azs" {
   default = {
-    us-east-1 = "a,b,c,d,e"
-    eu-central-1 = "a,b"
+    "eu-west-1"    = "a,b,c"
+    "eu-central-1" = "a,b"
   }
 }
 
@@ -20,8 +29,8 @@ variable "instance_type" {
 
 variable "amis_ubuntu_140404" {
   default = {
-    eu-west-1    = "ami-f95ef58a"
-    eu-central-1 = "ami-7e9b7c11"
+    "eu-west-1"    = "ami-f95ef58a"
+    "eu-central-1" = "ami-7e9b7c11"
   }
 }
 

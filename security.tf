@@ -30,7 +30,7 @@ resource "aws_security_group" "puppetca_elb" {
 
   tags {
     Name  = "${var.owner}_puppet_puppetca_elb_sg"
-    owner = "${var.owner}"
+    Owner = "${var.owner}"
   }
 }
 
@@ -58,7 +58,7 @@ resource "aws_security_group" "puppetdb_elb" {
 
   tags {
     Name  = "${var.owner}_puppet_puppetdb_elb_sg"
-    owner = "${var.owner}"
+    Owner = "${var.owner}"
   }
 }
 
@@ -98,7 +98,7 @@ resource "aws_security_group" "default" {
 
   tags {
     Name  = "${var.owner}_puppet_default_sg"
-    owner = "${var.owner}"
+    Owner = "${var.owner}"
   }
 }
 
@@ -118,7 +118,7 @@ resource "aws_security_group" "jump" {
 
   tags {
     Name  = "${var.owner}_puppet_jump_sg"
-    owner = "${var.owner}"
+    Owner = "${var.owner}"
   }
 }
 
@@ -138,7 +138,7 @@ resource "aws_security_group" "puppetdb" {
 
   tags {
     Name  = "${var.owner}_puppet_puppetdb_sg"
-    owner = "${var.owner}"
+    Owner = "${var.owner}"
   }
 }
 
@@ -158,6 +158,6 @@ resource "aws_security_group" "puppetca" {
 
   tags {
     Name  = "${var.owner}_puppet_puppetca_sg"
-    owner = "${var.owner}"
+    Owner = "${var.owner}"
   }
 }
