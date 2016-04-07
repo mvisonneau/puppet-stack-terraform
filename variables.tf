@@ -8,10 +8,6 @@ variable "domain" {
   default = "example.lan"
 }
 
-variable "dns_servers" {
-  default = "8.8.8.8"
-}
-
 variable "region" {
   default = "eu-central-1"
 }
