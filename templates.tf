@@ -48,6 +48,7 @@ resource "template_file" "server" {
     r10k_version    = "${var.r10k_version}"
     pm_gms_version  = "${var.pm_gms_version}"
     pm_r10k_version = "${var.pm_r10k_version}"
+    pm_lvm_version  = "${var.pm_lvm_version}"
     hiera_file_path = "${var.hiera_file_path}"
     site_file_path  = "${var.site_file_path}"
   }

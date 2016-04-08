@@ -1,9 +1,5 @@
 #
-# SECURITY GROUPS
-#
-
-#
-# ELBs SGs
+# ELB SECURITY GROUPS
 #
 
 # PUPPETCA ELB
@@ -63,7 +59,7 @@ resource "aws_security_group" "puppetdb_elb" {
 }
 
 #
-# INSTANCES SGs
+# INSTANCES SECURITY GROUPS
 #
 
 # DEFAULT SG
