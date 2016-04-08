@@ -58,9 +58,13 @@ mount { '/dev/sslvg/ssllv':
   pass   => '2',
 }
 
-# Link the root user key to the host one
+# Link the root user keys to the host ones
 file { '/root/.ssh/id_rsa':
   ensure => '/etc/ssh/ssh_host_rsa_key',
+}
+
+file { '/root/.ssh/id_rsa.pub':
+  ensure => '/etc/ssh/ssh_host_rsa_key.pub',
 }
 END
 
