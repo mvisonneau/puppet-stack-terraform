@@ -30,7 +30,8 @@ class { '::r10k':
   require           => Git_deploy_key['add_deploy_key_to_puppet_control'],
 }
 
-# Required packages
+# Sorry about this one, need to figure out how to remove it from here, guessing
+# that not everyone need this..
 package { 'figlet':
   ensure => present,
 }
