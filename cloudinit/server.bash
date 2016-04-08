@@ -36,6 +36,28 @@ package { 'figlet':
   ensure => present,
 }
 
+# FS Management
+class { '::lvm':
+  manage_pkg => true,
+} ->
+
+lvm::volume { 'ssllv':
+  ensure => present,
+  vg     => 'sslvg',
+  pv     => '/dev/xvdb',
+  fstype => 'ext4',
+} ->
+
+mount { '/dev/sslvg/ssllv':
+  ensure => mounted,
+  name   => '/etc/puppetlabs/puppet/ssl',
+  atboot => true,
+  device => '/dev/sslvg/ssllv',
+  dump   => '1',
+  fstype => 'ext4',
+  pass   => '2',
+}
+
 # Link the root user key to the host one
 file { '/root/.ssh/id_rsa':
   ensure => '/etc/ssh/ssh_host_rsa_key',
@@ -45,6 +67,7 @@ END
 # Install required modules
 puppet module install abrader-gms -v ${pm_gms_version}
 puppet module install zack-r10k -v ${pm_r10k_version}
+puppet module install puppetlabs-lvm -v ${pm_lvm_version}
 
 # Bootstrap R10K
 puppet apply /tmp/bootstrap_r10k.pp

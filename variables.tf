@@ -99,6 +99,10 @@ variable "pm_r10k_version" {
   default = "3.2.0"
 }
 
+variable "pm_lvm_version" {
+  default = "0.7.0"
+}
+
 variable "hiera_file_path" {
   default = "/etc/puppetlabs/code/environments/production/site/profiles/files/puppet/server/hiera.yaml"
 }
