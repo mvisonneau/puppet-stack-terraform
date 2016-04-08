@@ -2,9 +2,14 @@
 # PRIVATE VARIABLES
 #
 
-access_key = "{YOUR_AWS_ACCESS_KEY}"
-secret_key = "{YOUR_AWS_SECRET_KEY}"
-ssh_key    = "{YOUR_PUBLIC_SSH_KEY}"
-owner      = "{YOUR_NAME}"
-vdc        = "{YOUR_VIRTUAL_DC_ACRONYM}"
-domain     = "{YOUR_DOMAIN}"
+access_key    = "{YOUR_AWS_ACCESS_KEY}"
+secret_key    = "{YOUR_AWS_SECRET_KEY}"
+ssh_key       = "{YOUR_PUBLIC_SSH_KEY}"
+owner         = "{YOUR_NAME}"
+vdc           = "{YOUR_VIRTUAL_DC_ACRONYM}"
+domain        = "{YOUR_DOMAIN}"
+git_provider  = "{YOUR_GIT_PROVIDER}"
+git_api_token = "{YOUR_GIT_API_TOKEN}"
+git_hostname  = "{YOUR_GIT_HOSTNAME}"
+git_user      = "{YOUR_GIT_USER}"
+git_project   = "{YOUR_GIT_PROJECT}"

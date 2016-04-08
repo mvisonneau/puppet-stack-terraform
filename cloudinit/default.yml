@@ -11,7 +11,7 @@ apt_sources:
 apt_update: true
 apt_upgrade: true
 packages:
-  - puppet-agent, 1.4.1-1trusty
+  - puppet-agent=${puppet_agent_version}
 locale: en_US.UTF-8
 timezone: UTC
 final_message: "The system is finally up, after $UPTIME seconds"
