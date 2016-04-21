@@ -132,6 +132,14 @@ resource "aws_security_group" "puppetdb" {
     cidr_blocks = ["${aws_vpc.default.cidr_block}"]
   }
 
+  # HTTPS FROM ELB
+  ingress {
+    from_port   = 8081
+    to_port     = 8081
+    protocol    = "tcp"
+    security_groups = ["${aws_security_group.puppetdb_elb.id}"]
+  }
+
   tags {
     Name  = "${var.owner}_puppet_puppetdb_sg"
     Owner = "${var.owner}"
@@ -150,6 +158,14 @@ resource "aws_security_group" "puppetca" {
     to_port     = 8140
     protocol    = "tcp"
     cidr_blocks = ["${aws_vpc.default.cidr_block}"]
+  }
+
+  # HTTPS FROM ELB
+  ingress {
+    from_port   = 8140
+    to_port     = 8140
+    protocol    = "tcp"
+    security_groups = ["${aws_security_group.puppetca_elb.id}"]
   }
 
   tags {

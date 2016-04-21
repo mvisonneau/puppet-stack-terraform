@@ -12,6 +12,24 @@ resource "aws_vpc" "default" {
 }
 
 #
+# DHCP
+#
+resource "aws_vpc_dhcp_options" "default" {
+  domain_name = "${var.domain}"
+  domain_name_servers = ["AmazonProvidedDNS"]
+  
+  tags {
+    Name      = "${var.owner}_puppet_vpc"
+    Owner     = "${var.owner}"
+  }
+}
+
+resource "aws_vpc_dhcp_options_association" "default" {
+  vpc_id          = "${aws_vpc.default.id}"
+  dhcp_options_id = "${aws_vpc_dhcp_options.default.id}"
+}
+
+#
 # EIPs
 #
 resource "aws_eip" "natgw" {

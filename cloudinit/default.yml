@@ -2,8 +2,6 @@
 hostname: ${hostname}
 bootcmd:
   - echo "127.0.0.1 localhost" > /etc/hosts
-  - echo "search ${domain}" > /etc/resolvconf/resolv.conf.d/tail
-  - /sbin/resolvconf -u
 apt_sources:
   - source: deb http://apt.puppetlabs.com $RELEASE PC1
     keyid: 4BD6EC30

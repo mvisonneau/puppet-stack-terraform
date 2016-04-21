@@ -36,29 +36,34 @@ resource "template_file" "jump" {
 # PUPPET RELATED TEMPLATES
 #
 resource "template_file" "server" {
-  template      = "${file("cloudinit/server.bash")}"
+  template                 = "${file("cloudinit/server.bash")}"
 
   vars {
-    git_provider    = "${var.git_provider}"
-    git_api_token   = "${var.git_api_token}"
-    git_hostname    = "${var.git_hostname}"
-    git_user        = "${var.git_user}"
-    git_project     = "${var.git_project}"
-    git_port        = "${var.git_port}"
-    r10k_version    = "${var.r10k_version}"
-    pm_gms_version  = "${var.pm_gms_version}"
-    pm_r10k_version = "${var.pm_r10k_version}"
-    pm_lvm_version  = "${var.pm_lvm_version}"
-    hiera_file_path = "${var.hiera_file_path}"
-    site_file_path  = "${var.site_file_path}"
+    git_api_token          = "${var.git_api_token}"
+    git_control_project    = "${var.git_control_project}"
+    git_encryption_project = "${var.git_encryption_project}"
+    git_hostname           = "${var.git_hostname}"
+    git_port               = "${var.git_port}"
+    git_provider           = "${var.git_provider}"
+    git_user               = "${var.git_user}"
+    hiera_eyaml_version    = "${var.hiera_eyaml_version}"
+    hiera_file_path        = "${var.hiera_file_path}"
+    pm_gms_version         = "${var.pm_gms_version}"
+    pm_lvm_version         = "${var.pm_lvm_version}"
+    pm_r10k_version        = "${var.pm_r10k_version}"
+    r10k_version           = "${var.r10k_version}"
+    site_file_path         = "${var.site_file_path}"
+    encryption_environment = "${var.encryption_environment}"
+    control_environment    = "${var.control_environment}"
   }
 }
 
 resource "template_file" "agent" {
-  template      = "${file("cloudinit/agent.bash")}"
+  template              = "${file("cloudinit/agent.bash")}"
 
   vars {
-    server_name = "${var.vdc}-puppetca01.${var.domain}"
+    server_name         = "${var.vdc}-puppetca01.${var.domain}"
+    control_environment = "${var.control_environment}"
   }
 }
 
@@ -66,8 +71,8 @@ resource "template_file" "agent" {
 # AGGREGATED CLOUDINIT TEMPLATES
 #
 resource "template_cloudinit_config" "puppetca" {
-  gzip = true
-  base64_encode = false
+  gzip           = false
+  base64_encode  = false
 
   part {
     content_type = "text/cloud-config"
@@ -81,9 +86,10 @@ resource "template_cloudinit_config" "puppetca" {
 }
 
 resource "template_cloudinit_config" "puppetdb" {
-  gzip = true
-  base64_encode = false
-  count         = "${length( split( ",", lookup( var.azs, var.region ) ) )}"
+  gzip           = false
+  base64_encode  = false
+
+  count          = "${length( split( ",", lookup( var.azs, var.region ) ) )}"
 
   part {
     content_type = "text/cloud-config"
@@ -97,8 +103,8 @@ resource "template_cloudinit_config" "puppetdb" {
 }
 
 resource "template_cloudinit_config" "jump" {
-  gzip = true
-  base64_encode = false
+  gzip           = false
+  base64_encode  = false
 
   part {
     content_type = "text/cloud-config"

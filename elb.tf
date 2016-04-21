@@ -8,9 +8,9 @@ resource "aws_elb" "puppetca" {
   name                        = "${var.owner}-puppetca"
 
   listener {
-    instance_port             = 8040
+    instance_port             = 8140
     instance_protocol         = "tcp"
-    lb_port                   = 8040
+    lb_port                   = 8140
     lb_protocol               = "tcp"
   }
 
@@ -38,6 +38,20 @@ resource "aws_elb" "puppetdb" {
     lb_protocol               = "tcp"
   }
 
+  /*listener {
+    instance_port             = 443
+    instance_protocol         = "tcp"
+    lb_port                   = 443
+    lb_protocol               = "tcp"
+  }
+
+  listener {
+    instance_port             = 80
+    instance_protocol         = "tcp"
+    lb_port                   = 80
+    lb_protocol               = "tcp"
+  }*/
+
   /*health_check {
     healthy_threshold = 2
     unhealthy_threshold = 2
@@ -48,6 +62,7 @@ resource "aws_elb" "puppetdb" {
 
   instances                   = ["${aws_instance.puppetdb.*.id}"]
   security_groups             = ["${aws_security_group.puppetdb_elb.id}"]
+  cross_zone_load_balancing   = true
   idle_timeout                = 400
   connection_draining         = true
   connection_draining_timeout = 400
